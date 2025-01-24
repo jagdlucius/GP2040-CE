@@ -20,6 +20,7 @@
 #include "addons/tilt.h"
 #include "addons/keyboard_host.h"
 #include "addons/i2canalog1219.h"
+#include "addons/i2canalog1115.h"
 #include "addons/playernum.h"
 #include "addons/reverse.h"
 #include "addons/turbo.h"
@@ -98,6 +99,7 @@ void GP2040::setup() {
 	addons.LoadAddon(new DualDirectionalInput(), CORE0_INPUT);
 	addons.LoadAddon(new FocusModeAddon(), CORE0_INPUT);
 	addons.LoadAddon(new I2CAnalog1219Input(), CORE0_INPUT);
+	addons.LoadAddon(new I2CAnalog1115Input(), CORE0_INPUT);
 	addons.LoadAddon(new SPIAnalog1256Input(), CORE0_INPUT);
 	addons.LoadAddon(new WiiExtensionInput(), CORE0_INPUT);
 	addons.LoadAddon(new SNESpadInput(), CORE0_INPUT);

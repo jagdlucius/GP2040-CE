@@ -49,3 +49,33 @@ void ADS1115::setMux(uint8_t mux) {
     uint8_t new_config[3] = {ADS1115_REG_CONFIG, config[0], config[1]};
     i2c->write(address, new_config, 3);
 }
+
+bool ADS1115::isReady() {
+    // Read the current configuration register
+    uint8_t config[2];
+    i2c->readRegister(address, ADS1115_REG_CONFIG, config, 2);
+
+    // Check the OS bit (bit 15) in the configuration register
+    return (config[0] & 0x80) != 0; // Bit 15 is the MSB of config[0]
+}
+
+void ADS1115::setChannel(int channel){
+  config = ADS1115_MUX_AIN0_G;
+	switch (channel){
+    case (0):
+      config = ADS1115_MUX_AIN0_G;
+      break;
+    case (1):
+      config = ADS1115_MUX_AIN1_G;
+      break;
+    case (2):
+      config = ADS1115_MUX_AIN2_G;
+      break;
+    case (3):
+      config = ADS1115_MUX_AIN3_G;
+      break;
+	  default:
+	    break;
+  }
+  setMux(config);
+}

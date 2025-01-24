@@ -39,13 +39,20 @@ class ADS1115 {
         // Read the latest ADC conversion result
         int16_t readConversion();
 
-         // New method to set the MUX dynamically 
+         // Set the MUX dynamically 
         void setMux(uint8_t mux);
+
+        // Check if ADC data is ready
+        bool isReady();
 
         void setI2C(PeripheralI2C *i2cController) { this->i2c = i2cController; }
 	    void setAddress(uint8_t addr) { this->address = addr; }
 
+        void setChannel(int channel);
+
     private:
+
+        uint8_t config = 0x00;
 
 };
 

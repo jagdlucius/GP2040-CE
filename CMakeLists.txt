@@ -218,6 +218,7 @@ src/addons/dualdirectional.cpp
 src/addons/keyboard_host.cpp
 src/addons/keyboard_host_listener.cpp
 src/addons/i2canalog1219.cpp
+src/addons/i2canalog1115.cpp
 src/addons/i2c_gpio_pcf8575.cpp
 src/addons/display.cpp
 src/addons/neopicoleds.cpp
@@ -254,6 +255,7 @@ AnimationStation
 CRC32
 FlashPROM
 ADS1219
+ADS1115
 ADS1256
 PlayerLEDs
 NeoPico
@@ -277,6 +279,7 @@ headers/events
 headers/interfaces
 headers/interfaces/i2c
 headers/interfaces/i2c/ads1219
+headers/interfaces/i2c/ads1115
 headers/interfaces/i2c/pcf8575
 headers/interfaces/i2c/ssd1306
 headers/interfaces/i2c/wiiextension

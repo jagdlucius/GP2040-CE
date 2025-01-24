@@ -48,7 +48,9 @@ class ADS1115 {
         void setI2C(PeripheralI2C *i2cController) { this->i2c = i2cController; }
 	    void setAddress(uint8_t addr) { this->address = addr; }
 
-        void setChannel(int channel);
+        void setChannel(uint8_t channel);
+
+        void printI2CScan();
 
     private:
 

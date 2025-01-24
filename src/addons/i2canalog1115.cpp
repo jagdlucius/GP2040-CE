@@ -2,8 +2,9 @@
 #include "storagemanager.h"
 #include "helper.h"
 #include "config.pb.h"
+#include "iostream"
 
-#define ADS_MAX (float)((1 << 23) - 1)
+#define ADS_MAX (float)((1 << 16) - 1)
 #define VREF_VOLTAGE 2.048f
 
 bool I2CAnalog1115Input::available() {
@@ -24,7 +25,7 @@ void I2CAnalog1115Input::setup() {
     memset(&pins, 0, sizeof(ADS1115_PINS));
     channelHop = 0;
 
-    uIntervalMS = 1;
+    uIntervalMS = 2;
     nextTimer = getMillis();
 
     // Init our ADS1115 library
@@ -35,15 +36,13 @@ void I2CAnalog1115Input::process()
 {
     if (nextTimer < getMillis()) {
         float result;
-        uint32_t readValue;
-        if ( ads->isReady() ) {
+        uint16_t readValue;
             readValue = ads->readConversion();
             result = readValue / float(ADS_MAX); // gives us 0.0f to 1.0f (actual voltage is times voltage)
             pins.A[channelHop] = result;
             channelHop = (channelHop+1) % 4; // Loop 0-3
             ads->setMux(channelHop);
             nextTimer = getMillis() + uIntervalMS; // interval for read (we can't be too fast)
-        }
     }
 
     Gamepad * gamepad = Storage::getInstance().GetGamepad();
